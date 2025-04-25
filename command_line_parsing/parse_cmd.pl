@@ -6,12 +6,28 @@ use Getopt::Long;
 # These will default to undef
 my $name;
 my $age;
+my $help;
+
 
 # Parse options
 GetOptions(
     'name=s' => \$name,
     'age=i'  => \$age,
-) or die "Usage: $0 [--name STRING] [--age INT]\n";
+    'help|h'   => \$help,  
+) or usage();
+
+usage() if $help;
+
+sub usage {
+    print <<"USAGE";
+Usage: $0 [options]
+
+    --name STRING    set the user’s name
+    --age  INT       set the user’s age
+    --help, -h       show this help message
+USAGE
+    exit;
+}
 
 # Optional behavior
 if (defined $name) {
